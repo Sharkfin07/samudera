@@ -11,10 +11,10 @@ Future<void> main() async {
       expect(response.data, isNotNull);
     }); // just kidding kak
 
-    test("Get intraday stocks", () async {
+    test("Get daily stocks of IBM", () async {
       final apiClient = ApiClient.instance();
       final response = await apiClient.query(
-        function: "TIME_SERIES_INTRADAY",
+        function: "TIME_SERIES_DAILY",
         parameters: {"SYMBOL": "IBM", "INTERVAL": "1min"},
       );
       expect(response, isNotNull);
