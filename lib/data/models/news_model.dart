@@ -15,7 +15,7 @@ class News {
   String timePublished;
   List<String> authors;
   String summary;
-  String bannerImage;
+  String? bannerImage;
   String source;
   String categoryWithinSource;
   String sourceDomain;
@@ -30,7 +30,6 @@ class News {
     required this.timePublished,
     required this.authors,
     required this.summary,
-    required this.bannerImage,
     required this.source,
     required this.categoryWithinSource,
     required this.sourceDomain,
@@ -38,6 +37,7 @@ class News {
     required this.overallSentimentScore,
     required this.overallSentimentLabel,
     required this.tickerSentiment,
+    this.bannerImage,
   });
 
   factory News.fromJson(Map<String, dynamic> json) => News(

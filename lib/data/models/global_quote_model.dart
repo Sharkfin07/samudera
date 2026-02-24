@@ -36,29 +36,29 @@ class GlobalQuote {
   });
 
   factory GlobalQuote.fromJson(Map<String, dynamic> json) => GlobalQuote(
-    symbol: json["symbol"],
-    open: json["open"],
-    high: json["high"],
-    low: json["low"],
-    price: json["price"],
-    volume: json["volume"],
-    latestTradingDay: DateTime.parse(json["latest trading day"]),
-    previousClose: json["previous close"],
-    change: json["change"],
-    changePercent: json["change percent"],
+    symbol: json["01. symbol"],
+    open: json["02. open"],
+    high: json["03. high"],
+    low: json["04. low"],
+    price: json["05. price"],
+    volume: json["06. volume"],
+    latestTradingDay: DateTime.parse(json["07. latest trading day"]),
+    previousClose: json["08. previous close"],
+    change: json["09. change"],
+    changePercent: json["10. change percent"],
   );
 
   Map<String, dynamic> toJson() => {
-    "symbol": symbol,
-    "open": open,
-    "high": high,
-    "low": low,
-    "price": price,
-    "volume": volume,
-    "latest trading day":
+    "01. symbol": symbol,
+    "02. open": open,
+    "03. high": high,
+    "04. low": low,
+    "05. price": price,
+    "06. volume": volume,
+    "07. latest trading day":
         "${latestTradingDay.year.toString().padLeft(4, '0')}-${latestTradingDay.month.toString().padLeft(2, '0')}-${latestTradingDay.day.toString().padLeft(2, '0')}",
-    "previous close": previousClose,
-    "change": change,
-    "change percent": changePercent,
+    "08. previous close": previousClose,
+    "09. change": change,
+    "10. change percent": changePercent,
   };
 }

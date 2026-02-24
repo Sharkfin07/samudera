@@ -36,26 +36,26 @@ class StockSearchResult {
 
   factory StockSearchResult.fromJson(Map<String, dynamic> json) =>
       StockSearchResult(
-        symbol: json["symbol"],
-        name: json["name"],
-        type: json["type"],
-        region: json["region"],
-        marketOpen: json["marketOpen"],
-        marketClose: json["marketClose"],
-        timezone: json["timezone"],
-        currency: json["currency"],
-        matchScore: json["matchScore"],
+        symbol: json["1. symbol"],
+        name: json["2. name"],
+        type: json["3. type"],
+        region: json["4. region"],
+        marketOpen: json["5. marketOpen"],
+        marketClose: json["6. marketClose"],
+        timezone: json["7. timezone"],
+        currency: json["8. currency"],
+        matchScore: json["9. matchScore"],
       );
 
   Map<String, dynamic> toJson() => {
-    "symbol": symbol,
-    "name": name,
-    "type": type,
-    "region": region,
-    "marketOpen": marketOpen,
-    "marketClose": marketClose,
-    "timezone": timezone,
-    "currency": currency,
-    "matchScore": matchScore,
+    "1. symbol": symbol,
+    "2. name": name,
+    "3. type": type,
+    "4. region": region,
+    "5. marketOpen": marketOpen,
+    "6. marketClose": marketClose,
+    "7. timezone": timezone,
+    "8. currency": currency,
+    "9. matchScore": matchScore,
   };
 }
