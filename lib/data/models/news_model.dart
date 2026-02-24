@@ -41,21 +41,27 @@ class News {
   });
 
   factory News.fromJson(Map<String, dynamic> json) => News(
-    title: json["title"],
-    url: json["url"],
-    timePublished: json["time_published"],
-    authors: List<String>.from(json["authors"].map((x) => x)),
-    summary: json["summary"],
+    title: json["title"] ?? '',
+    url: json["url"] ?? '',
+    timePublished: json["time_published"] ?? '',
+    authors: json["authors"] != null
+        ? List<String>.from(json["authors"].map((x) => x))
+        : [],
+    summary: json["summary"] ?? '',
     bannerImage: json["banner_image"],
-    source: json["source"],
-    categoryWithinSource: json["category_within_source"],
-    sourceDomain: json["source_domain"],
-    topics: List<Topic>.from(json["topics"].map((x) => Topic.fromJson(x))),
-    overallSentimentScore: json["overall_sentiment_score"]?.toDouble(),
-    overallSentimentLabel: json["overall_sentiment_label"],
-    tickerSentiment: List<TickerSentiment>.from(
-      json["ticker_sentiment"].map((x) => TickerSentiment.fromJson(x)),
-    ),
+    source: json["source"] ?? '',
+    categoryWithinSource: json["category_within_source"] ?? '',
+    sourceDomain: json["source_domain"] ?? '',
+    topics: json["topics"] != null
+        ? List<Topic>.from(json["topics"].map((x) => Topic.fromJson(x)))
+        : [],
+    overallSentimentScore: (json["overall_sentiment_score"] ?? 0).toDouble(),
+    overallSentimentLabel: json["overall_sentiment_label"] ?? '',
+    tickerSentiment: json["ticker_sentiment"] != null
+        ? List<TickerSentiment>.from(
+            json["ticker_sentiment"].map((x) => TickerSentiment.fromJson(x)),
+          )
+        : [],
   );
 
   Map<String, dynamic> toJson() => {
