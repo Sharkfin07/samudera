@@ -1,6 +1,6 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-// * The .env holds the api key and the base url for API communication purposes
+// * The .env holds the api key and the base url for API purposes
 class EnvConfig {
   static Future<void> load() => dotenv.load(fileName: ".env");
 
