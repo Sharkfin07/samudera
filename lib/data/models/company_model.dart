@@ -14,8 +14,6 @@ String companyToJson(Company data) => json.encode(data.toJson());
 class Company {
   String symbol;
   String name;
-  double price;
-  double changePercent;
   String sector;
   String marketCapitalization;
   String peRatio;
@@ -26,8 +24,6 @@ class Company {
   Company({
     required this.symbol,
     required this.name,
-    required this.price,
-    required this.changePercent,
     required this.sector,
     required this.marketCapitalization,
     required this.peRatio,
@@ -37,28 +33,24 @@ class Company {
   });
 
   factory Company.fromJson(Map<String, dynamic> json) => Company(
-    symbol: json["symbol"],
-    name: json["name"],
-    price: json["price"]?.toDouble(),
-    changePercent: json["changePercent"]?.toDouble(),
-    sector: json["sector"],
-    marketCapitalization: json["marketCapitalization"],
-    peRatio: json["peRatio"],
-    dividendYield: json["dividendYield"],
-    description: json["description"],
-    officialSite: json["officialSite"],
+    symbol: json["Symbol"],
+    name: json["Name"],
+    sector: json["Sector"],
+    marketCapitalization: json["MarketCapitalization"],
+    peRatio: json["PERatio"],
+    dividendYield: json["DividendYield"],
+    description: json["Description"],
+    officialSite: json["OfficialSite"],
   );
 
   Map<String, dynamic> toJson() => {
-    "symbol": symbol,
-    "name": name,
-    "price": price,
-    "changePercent": changePercent,
-    "sector": sector,
-    "marketCapitalization": marketCapitalization,
-    "peRatio": peRatio,
-    "dividendYield": dividendYield,
-    "description": description,
-    "officialSite": officialSite,
+    "Symbol": symbol,
+    "Name": name,
+    "Sector": sector,
+    "MarketCapitalization": marketCapitalization,
+    "PERatio": peRatio,
+    "DividendYield": dividendYield,
+    "Description": description,
+    "OfficialSite": officialSite,
   };
 }
