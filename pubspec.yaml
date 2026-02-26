@@ -1,5 +1,5 @@
 name: samudera
-description: "A new Flutter project."
+description: "The stock market made accessible!"
 publish_to: "none"
 version: 0.1.0
 
@@ -27,3 +27,40 @@ flutter:
 
   assets:
     - .env
+
+  fonts:
+    - family: Garet
+      fonts:
+        - asset: assets/fonts/Garet-Book.ttf
+          weight: 400
+        - asset: assets/fonts/Garet-Heavy.ttf
+          weight: 900
+
+    - family: IBMPlexSans
+      fonts:
+        - asset: assets/fonts/IBMPlexSans-Thin.ttf
+          weight: 100
+        - asset: assets/fonts/IBMPlexSans-ThinItalic.ttf
+          weight: 100
+          style: italic
+        - asset: assets/fonts/IBMPlexSans-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/IBMPlexSans-Light.ttf
+          weight: 300
+        - asset: assets/fonts/IBMPlexSans-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/IBMPlexSans-Italic.ttf
+          weight: 400
+          style: italic
+        - asset: assets/fonts/IBMPlexSans-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/IBMPlexSans-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/IBMPlexSans-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/IBMPlexSans-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/IBMPlexSans-BoldItalic.ttf
+          weight: 700
+          style: italic
