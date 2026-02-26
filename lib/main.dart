@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:samudera/presentation/dev/widget_showcase.dart';
+import 'package:samudera/presentation/theme/app_theme.dart';
 
 import './core/config/env_config.dart';
 
@@ -13,6 +14,11 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: WidgetShowcaseScreen());
+    return MaterialApp(
+      theme: AppTheme.light,
+      darkTheme: AppTheme.dark,
+      themeMode: ThemeMode.system,
+      home: WidgetShowcaseScreen(),
+    );
   }
 }

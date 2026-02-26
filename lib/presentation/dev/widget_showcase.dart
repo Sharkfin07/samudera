@@ -15,6 +15,7 @@ class WidgetShowcaseScreen extends StatelessWidget {
           children: [
             SizedBox(width: double.infinity),
             Text("AppPalette", textAlign: TextAlign.center),
+            SizedBox(height: 16),
             Row(
               spacing: 24,
               mainAxisAlignment: MainAxisAlignment.center,
