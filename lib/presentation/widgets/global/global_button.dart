@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:samudera/presentation/theme/app_palette.dart';
 import 'package:samudera/presentation/theme/app_theme.dart';
+import 'package:samudera/presentation/widgets/global/global_loading_indicator.dart';
 
 enum ButtonVariant { gradient, outlined, text }
 
@@ -150,16 +151,7 @@ class GlobalButton extends StatelessWidget {
         );
 
     final content = isLoading
-        ? SizedBox(
-            width: 18,
-            height: 18,
-            child: CircularProgressIndicator(
-              strokeWidth: 2,
-              valueColor: AlwaysStoppedAnimation<Color>(
-                foregroundIsLight ? Colors.white : AppPalette.vividBlue,
-              ),
-            ),
-          )
+        ? GlobalLoadingIndicator(size: 256)
         : Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,

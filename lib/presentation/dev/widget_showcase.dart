@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:samudera/presentation/theme/app_palette.dart';
 import 'package:samudera/presentation/widgets/global/global_button.dart';
+import 'package:samudera/presentation/widgets/global/global_loading_indicator.dart';
 import 'package:samudera/presentation/widgets/global/global_logo.dart';
 
 class WidgetShowcaseScreen extends StatelessWidget {
@@ -98,18 +99,23 @@ class WidgetShowcaseScreen extends StatelessWidget {
                     text: "Disabled Gradient Button",
                     variant: ButtonVariant.outlined,
                   ),
-                  _showcaseDivider(),
-                  Text("Global Logo", textAlign: TextAlign.center),
-                  Column(
-                    spacing: 12,
-                    children: [
-                      GlobalLogo(),
-                      GlobalLogo(variant: LogoVariant.short),
-                      GlobalLogo(variant: LogoVariant.long, size: 40),
-                    ],
-                  ),
                 ],
               ),
+              _showcaseDivider(),
+              Text("Global Logo", textAlign: TextAlign.center),
+              Column(
+                spacing: 12,
+                children: [
+                  GlobalLogo(),
+                  GlobalLogo(variant: LogoVariant.short),
+                  GlobalLogo(variant: LogoVariant.long, size: 40),
+                ],
+              ),
+              _showcaseDivider(),
+              Text("Loading Indicator", textAlign: TextAlign.center),
+              GlobalLoadingIndicator(),
+              GlobalLoadingIndicator(variant: LoadingIndicatorVariant.circle),
+              GlobalLoadingIndicator(variant: LoadingIndicatorVariant.plane),
             ],
           ),
         ),
