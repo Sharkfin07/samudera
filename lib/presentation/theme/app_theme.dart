@@ -141,7 +141,7 @@ class AppTheme {
     useMaterial3: true,
     brightness: Brightness.dark,
     primaryColor: AppPalette.vividBlue,
-    scaffoldBackgroundColor: AppPalette.darkIndigo,
+    scaffoldBackgroundColor: const Color(0xFF0B0B0F),
     colorScheme: ColorScheme.dark(
       primary: AppPalette.vividBlue,
       secondary: AppPalette.purple,
