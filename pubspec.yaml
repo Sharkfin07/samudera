@@ -27,6 +27,7 @@ flutter:
 
   assets:
     - .env
+    - assets/icons/
 
   fonts:
     - family: Garet

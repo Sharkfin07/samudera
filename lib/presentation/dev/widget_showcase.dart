@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:samudera/presentation/theme/app_palette.dart';
 import 'package:samudera/presentation/widgets/global/global_button.dart';
+import 'package:samudera/presentation/widgets/global/global_logo.dart';
 
 class WidgetShowcaseScreen extends StatelessWidget {
   const WidgetShowcaseScreen({super.key});
@@ -96,6 +97,16 @@ class WidgetShowcaseScreen extends StatelessWidget {
                   GlobalButton(
                     text: "Disabled Gradient Button",
                     variant: ButtonVariant.outlined,
+                  ),
+                  _showcaseDivider(),
+                  Text("Global Logo", textAlign: TextAlign.center),
+                  Column(
+                    spacing: 12,
+                    children: [
+                      GlobalLogo(),
+                      GlobalLogo(variant: LogoVariant.short),
+                      GlobalLogo(variant: LogoVariant.long, size: 40),
+                    ],
                   ),
                 ],
               ),
