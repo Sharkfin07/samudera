@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:samudera/presentation/dev/widget_showcase.dart';
+import 'package:samudera/presentation/screens/home_shell.dart';
 import 'package:samudera/presentation/theme/app_theme.dart';
 
 import './core/config/env_config.dart';
@@ -18,7 +18,7 @@ class MainApp extends StatelessWidget {
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
       themeMode: ThemeMode.system,
-      home: WidgetShowcaseScreen(),
+      home: HomeShell(),
     );
   }
 }

@@ -5,7 +5,13 @@ import 'package:samudera/presentation/theme/app_palette.dart';
 import 'package:samudera/presentation/widgets/global/global_logo.dart';
 
 class GlobalNavigationBar extends StatefulWidget {
-  const GlobalNavigationBar({super.key});
+  final int index;
+  final ValueChanged<int>? onTabChange;
+  const GlobalNavigationBar({
+    super.key,
+    required this.index,
+    required this.onTabChange,
+  });
 
   @override
   State<GlobalNavigationBar> createState() => _GlobalNavigationBarState();
@@ -13,9 +19,15 @@ class GlobalNavigationBar extends StatefulWidget {
 
 class _GlobalNavigationBarState extends State<GlobalNavigationBar> {
   final double gap = 10;
-  int selectedIndex = 0;
+  late int selectedIndex;
   int badge = 0;
   final padding = EdgeInsets.symmetric(horizontal: 18, vertical: 12);
+
+  @override
+  void initState() {
+    super.initState();
+    selectedIndex = widget.index;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,9 +67,13 @@ class _GlobalNavigationBarState extends State<GlobalNavigationBar> {
               ),
               GButton(
                 gap: gap,
-                iconActiveColor: AppPalette.vividIndigo,
+                iconActiveColor: isDarkMode
+                    ? AppPalette.lightIndigo
+                    : AppPalette.vividIndigo,
                 iconColor: iconColor,
-                textColor: AppPalette.vividIndigo,
+                textColor: isDarkMode
+                    ? AppPalette.lightIndigo
+                    : AppPalette.vividIndigo,
                 backgroundColor: AppPalette.vividIndigo.withValues(alpha: .2),
                 iconSize: 24,
                 padding: padding,
@@ -89,9 +105,7 @@ class _GlobalNavigationBarState extends State<GlobalNavigationBar> {
             ],
             selectedIndex: selectedIndex,
             onTabChange: (index) {
-              setState(() {
-                selectedIndex = index;
-              });
+              widget.onTabChange?.call(index);
             },
           ),
         ),
