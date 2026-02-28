@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:samudera/presentation/theme/app_palette.dart';
 import 'package:samudera/presentation/widgets/global/global_button.dart';
+import 'package:samudera/presentation/widgets/global/global_field.dart';
 import 'package:samudera/presentation/widgets/global/global_loading_indicator.dart';
 import 'package:samudera/presentation/widgets/global/global_logo.dart';
 
@@ -116,6 +117,11 @@ class WidgetShowcaseScreen extends StatelessWidget {
               GlobalLoadingIndicator(),
               GlobalLoadingIndicator(variant: LoadingIndicatorVariant.circle),
               GlobalLoadingIndicator(variant: LoadingIndicatorVariant.plane),
+              _showcaseDivider(),
+              Text("Text Field"),
+              GlobalField(
+                prefixIcon: Icon(Icons.search, color: AppPalette.vividBlue),
+              ),
             ],
           ),
         ),
