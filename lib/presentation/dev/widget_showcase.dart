@@ -4,6 +4,7 @@ import 'package:samudera/presentation/widgets/global/global_button.dart';
 import 'package:samudera/presentation/widgets/global/global_field.dart';
 import 'package:samudera/presentation/widgets/global/global_loading_indicator.dart';
 import 'package:samudera/presentation/widgets/global/global_logo.dart';
+import 'package:samudera/presentation/widgets/global/navigation_bar.dart';
 
 class WidgetShowcaseScreen extends StatelessWidget {
   const WidgetShowcaseScreen({super.key});
@@ -126,6 +127,7 @@ class WidgetShowcaseScreen extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: GlobalNavigationBar(),
     );
   }
 
