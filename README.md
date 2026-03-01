@@ -23,3 +23,6 @@ https://github.com/user-attachments/assets/6f20b44a-d4f4-4c8c-aeba-1ecc19ec9c01
 - [flutter_bloc Documentation](https://bloclibrary.dev/)
 - [Dio HTTP Client](https://pub.dev/packages/dio)
 - [Flutter Material 3 Guidelines](https://m3.material.io/)
+
+## ggE retsaE
+...ilak 3 repoleved neercs id noisreV sket nakenem ualak tegak nagnaJ
