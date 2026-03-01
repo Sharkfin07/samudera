@@ -1,5 +1,5 @@
 # Samudera
-
+<img width="1920" height="1080" alt="Samudera hero image" src="https://github.com/user-attachments/assets/3781307e-40b8-4590-b32a-a786586c0eb6" />
 Samudera adalah aplikasi Flutter yang menampilkan data pasar saham menggunakan AlphaVantage API. Aplikasi ini memiliki fitur eksplorasi market movers (gainers, losers, most active), berita sentimen pasar, dan detail perusahaan lengkap dengan grafik harga historis.
 
 ## Lessons Learned (275 Kata)
@@ -11,6 +11,10 @@ Salah satu tantangan terbesar yang saya hadapi adalah rate limiting pada API Alp
 Saya juga sempat menghadapi masalah null safety pada response API. Ketika rate limit tercapai, API mengembalikan response yang berbeda dari struktur data yang diharapkan, yang sempat menyebabkan aplikasi crash. Dari situ, saya belajar pentingnya validasi response sebelum parsing. Saya menambahkan pengecekan null dan verifikasi struktur data pada layer repository agar aplikasi dapat menangani kondisi tak terduga dengan lebih aman.
 
 Proses development Samudera makin memperkuat sentimen saya bahwa memastikan fitur sekadar "bisa digunakan" tidak cukup, aplikasi sebaiknya dirancang agar sedekat mungkin dengan standar industri dan tidak hanya user-friendly, tetapi juga developer-friendly agar tetap stabil dan skalabel meskipun ada keterbatasan dari layanan eksternal. 
+
+## Demo Video
+
+https://github.com/user-attachments/assets/6f20b44a-d4f4-4c8c-aeba-1ecc19ec9c01
 
 ## Referensi
 
