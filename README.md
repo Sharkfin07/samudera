@@ -2,6 +2,28 @@
 <img width="1920" height="1080" alt="Samudera hero image" src="https://github.com/user-attachments/assets/3781307e-40b8-4590-b32a-a786586c0eb6" />
 Samudera adalah aplikasi Flutter yang menampilkan data pasar saham menggunakan AlphaVantage API. Aplikasi ini memiliki fitur eksplorasi market movers (gainers, losers, most active), berita sentimen pasar, dan detail perusahaan lengkap dengan grafik harga historis.
 
+## Fitur
+
+- **Explore**, Menampilkan top gainers, top losers, dan most actively traded stocks hari ini dengan segmented tab bar.
+- **News**, Berita sentimen pasar dengan tag sentimen (Bullish/Bearish/Neutral), sorting (Latest/Relevance/Earliest), dan banner image.
+- **Company Detail**, Informasi lengkap perusahaan (overview, sector, market cap, P/E ratio, dividend yield), harga real-time (open/high/low/close/volume), dan grafik harga 30 hari terakhir menggunakan fl_chart.
+- **Developer**, Halaman profil untuk berkenalan lebih lanjut dengan developer Samudera.
+- **Dark Mode**, Mendukung tema terang dan gelap secara otomatis mengikuti pengaturan sistem.
+
+## Packages
+
+| Package | Kegunaan |
+|---|---|
+| `dio` | HTTP client untuk komunikasi dengan AlphaVantage API |
+| `flutter_bloc` | State management menggunakan pola Cubit |
+| `fl_chart` | Visualisasi grafik harga saham (line chart) |
+| `flutter_dotenv` | Memuat konfigurasi environment (.env) untuk API key |
+| `flutter_svg` | Render aset SVG |
+| `lottie` | Animasi loading indicator |
+| `google_nav_bar` | Bottom navigation bar |
+| `intl` | Formatting tanggal pada chart tooltip |
+| `super_bullet_list` | Widget bullet list pada halaman developer |
+
 ## Lessons Learned (275 Kata)
 
 Selama pengembangan aplikasi Samudera, saya banyak belajar tentang manajemen state menggunakan pola Cubit dari `flutter_bloc`. Sebelumnya saya lebih familiar dengan Riverpod dan BLoC, jadi mencoba Cubit memberi perspektif baru. Saya memilih Cubit karena implementasinya lebih straightforward dan minim boilerplate, sehingga cocok untuk proyek kecil seperti Samudera. 
@@ -25,4 +47,4 @@ https://github.com/user-attachments/assets/6f20b44a-d4f4-4c8c-aeba-1ecc19ec9c01
 - [Flutter Material 3 Guidelines](https://m3.material.io/)
 
 ## ggE retsaE
-...ilak 3 repoleved neercs id noisreV sket nakenem ualak tegak nagnaJ
+...ilak 3 repoleved neercs id noisrev sket nakenem ualak tegak nagnaJ
