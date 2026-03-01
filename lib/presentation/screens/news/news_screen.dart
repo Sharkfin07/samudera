@@ -5,6 +5,7 @@ import 'package:samudera/data/services/news_service.dart';
 import 'package:samudera/presentation/cubit/news_cubit.dart';
 import 'package:samudera/presentation/theme/app_palette.dart';
 import 'package:samudera/presentation/widgets/global/global_loading_indicator.dart';
+import 'package:samudera/presentation/widgets/global/global_sliver_app_bar.dart';
 import 'package:samudera/presentation/widgets/news/news_card.dart';
 
 class NewsScreen extends StatelessWidget {
@@ -13,6 +14,11 @@ class NewsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isDarkMode = isDark(context);
+    final String heroImage =
+        "assets/images/hero-image-${isDarkMode ? "2" : "1"}.jpg";
+    final String heroTitle = "News";
+    final String heroDesc = 'Get market insights & updates.';
+    final IconData heroIcon = Icons.newspaper;
 
     return Scaffold(
       body: RefreshIndicator(
@@ -20,72 +26,12 @@ class NewsScreen extends StatelessWidget {
         onRefresh: () => context.read<NewsCubit>().refresh(),
         child: CustomScrollView(
           slivers: [
-            SliverAppBar(
-              expandedHeight: 120,
-              pinned: false,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(
-                  bottom: Radius.circular(20),
-                ),
-              ),
-              flexibleSpace: ClipRRect(
-                borderRadius: const BorderRadius.vertical(
-                  bottom: Radius.circular(20),
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                        "assets/images/hero-image-${isDarkMode ? "2" : "1"}.jpg",
-                      ),
-                      colorFilter: ColorFilter.mode(
-                        Colors.black.withValues(alpha: 0.6),
-                        BlendMode.darken,
-                      ),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  child: SafeArea(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: const [
-                              Icon(Icons.newspaper, color: Colors.white),
-                              SizedBox(width: 10),
-                              Text(
-                                'News',
-                                style: TextStyle(
-                                  fontFamily: 'Garet',
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 22,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 4),
-                          const Text(
-                            'Get market insights & updates.',
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w300,
-                              color: Colors.white70,
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+            GlobalSliverAppBar(
+              heroImage: heroImage,
+              heroTitle: heroTitle,
+              heroDesc: heroDesc,
+              heroIcon: heroIcon,
             ),
-
             SliverToBoxAdapter(
               child: BlocSelector<NewsCubit, NewsState, NewsSort>(
                 selector: (state) => state.sort,
