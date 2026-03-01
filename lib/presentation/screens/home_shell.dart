@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:samudera/presentation/cubit/news_cubit.dart';
 import 'package:samudera/presentation/screens/developer/developer_screen.dart';
 import 'package:samudera/presentation/screens/explore/explore_screen.dart';
 import 'package:samudera/presentation/screens/news/news_screen.dart';
@@ -27,11 +29,17 @@ class _HomeShellState extends State<HomeShell> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: IndexedStack(index: _index, children: _pages),
-      bottomNavigationBar: GlobalNavigationBar(
-        index: _index,
-        onTabChange: _onTabChange,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<NewsCubit>(create: (_) => NewsCubit()..fetchNews()),
+        // tambah BlocProvider lain di sini nanti
+      ],
+      child: Scaffold(
+        body: IndexedStack(index: _index, children: _pages),
+        bottomNavigationBar: GlobalNavigationBar(
+          index: _index,
+          onTabChange: _onTabChange,
+        ),
       ),
     );
   }

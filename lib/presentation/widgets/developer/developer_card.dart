@@ -34,7 +34,7 @@ class DeveloperCard extends StatelessWidget {
               width: double.infinity,
               height: 300,
               decoration: BoxDecoration(
-                color: Colors.red,
+                color: Colors.grey,
                 image: DecorationImage(
                   image: AssetImage(picturePath),
                   fit: BoxFit.cover,

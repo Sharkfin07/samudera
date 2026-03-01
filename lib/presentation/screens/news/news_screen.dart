@@ -1,190 +1,248 @@
 import 'package:flutter/material.dart';
-import 'package:samudera/data/models/news_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:samudera/core/utils/is_dark.dart';
+import 'package:samudera/data/services/news_service.dart';
+import 'package:samudera/presentation/cubit/news_cubit.dart';
+import 'package:samudera/presentation/theme/app_palette.dart';
+import 'package:samudera/presentation/widgets/global/global_loading_indicator.dart';
 import 'package:samudera/presentation/widgets/news/news_card.dart';
-
-final List<News> dummyArticles = [
-  News(
-    title: 'Apple Reports Record Q4 Earnings Beating Wall Street Expectations',
-    url: 'https://example.com/apple-earnings',
-    timePublished: '20260228T143000',
-    authors: ['John Smith', 'Jane Doe'],
-    summary:
-        'Apple Inc. reported record fourth-quarter earnings on Friday, surpassing '
-        'analyst expectations with strong iPhone and Services revenue. The tech '
-        'giant posted earnings per share of \$2.10 on revenue of \$94.9 billion.',
-    bannerImage: 'https://picsum.photos/seed/apple/800/400',
-    source: 'Bloomberg',
-    categoryWithinSource: 'Technology',
-    sourceDomain: 'bloomberg.com',
-    topics: [
-      Topic(topic: 'Technology', relevanceScore: '0.95'),
-      Topic(topic: 'Earnings', relevanceScore: '0.88'),
-    ],
-    overallSentimentScore: 0.35,
-    overallSentimentLabel: 'Bullish',
-    tickerSentiment: [
-      TickerSentiment(
-        ticker: 'AAPL',
-        relevanceScore: '0.98',
-        tickerSentimentScore: '0.42',
-        tickerSentimentLabel: 'Bullish',
-      ),
-    ],
-  ),
-  News(
-    title: 'Federal Reserve Signals Potential Rate Cut Amid Cooling Inflation',
-    url: 'https://example.com/fed-rate-cut',
-    timePublished: '20260228T100000',
-    authors: ['Sarah Johnson'],
-    summary:
-        'The Federal Reserve indicated it may begin cutting interest rates as '
-        'inflation shows signs of cooling. Fed Chair Jerome Powell noted that '
-        'recent economic data supports a more accommodative monetary policy stance.',
-    bannerImage: 'https://picsum.photos/seed/fed/800/400',
-    source: 'Reuters',
-    categoryWithinSource: 'Economy',
-    sourceDomain: 'reuters.com',
-    topics: [
-      Topic(topic: 'Economy - Monetary', relevanceScore: '0.99'),
-      Topic(topic: 'Financial Markets', relevanceScore: '0.80'),
-    ],
-    overallSentimentScore: 0.12,
-    overallSentimentLabel: 'Somewhat-Bullish',
-    tickerSentiment: [],
-  ),
-  News(
-    title: 'Tesla Stock Drops 8% After Missing Delivery Targets for Q1',
-    url: 'https://example.com/tesla-drop',
-    timePublished: '20260227T183000',
-    authors: ['Mike Chen'],
-    summary:
-        'Tesla shares fell sharply after the EV maker reported quarterly '
-        'deliveries below expectations. The company delivered 410,000 vehicles, '
-        'missing the consensus estimate of 450,000 units.',
-    bannerImage: 'https://picsum.photos/seed/tesla/800/400',
-    source: 'CNBC',
-    categoryWithinSource: 'Automotive',
-    sourceDomain: 'cnbc.com',
-    topics: [
-      Topic(topic: 'Manufacturing', relevanceScore: '0.90'),
-      Topic(topic: 'Technology', relevanceScore: '0.70'),
-    ],
-    overallSentimentScore: -0.35,
-    overallSentimentLabel: 'Bearish',
-    tickerSentiment: [
-      TickerSentiment(
-        ticker: 'TSLA',
-        relevanceScore: '0.99',
-        tickerSentimentScore: '-0.45',
-        tickerSentimentLabel: 'Bearish',
-      ),
-    ],
-  ),
-  News(
-    title: 'NVIDIA Unveils Next-Gen AI Chip, Stock Surges to All-Time High',
-    url: 'https://example.com/nvidia-ai',
-    timePublished: '20260227T120000',
-    authors: ['Emily Wang', 'David Park'],
-    summary:
-        'NVIDIA announced its next-generation AI accelerator at the GTC conference, '
-        'sending shares to a record high. The new Blackwell Ultra chip promises '
-        '4x performance gains for large language model training workloads.',
-    bannerImage: 'https://picsum.photos/seed/nvidia/800/400',
-    source: 'TechCrunch',
-    categoryWithinSource: 'AI & Semiconductors',
-    sourceDomain: 'techcrunch.com',
-    topics: [
-      Topic(topic: 'Technology', relevanceScore: '0.97'),
-      Topic(topic: 'Financial Markets', relevanceScore: '0.75'),
-    ],
-    overallSentimentScore: 0.50,
-    overallSentimentLabel: 'Bullish',
-    tickerSentiment: [
-      TickerSentiment(
-        ticker: 'NVDA',
-        relevanceScore: '0.99',
-        tickerSentimentScore: '0.55',
-        tickerSentimentLabel: 'Bullish',
-      ),
-    ],
-  ),
-  News(
-    title: 'Oil Prices Decline as OPEC+ Increases Production Quotas',
-    url: 'https://example.com/oil-opec',
-    timePublished: '20260226T090000',
-    authors: ['Ahmed Hassan'],
-    summary:
-        'Crude oil prices fell over 3% after OPEC+ agreed to raise production '
-        'quotas starting next month. Brent crude dropped to \$72 per barrel as '
-        'markets digest the implications of increased global supply.',
-    bannerImage: null,
-    source: 'Financial Times',
-    categoryWithinSource: 'Energy',
-    sourceDomain: 'ft.com',
-    topics: [
-      Topic(topic: 'Energy & Transportation', relevanceScore: '0.95'),
-      Topic(topic: 'Economy - Macro', relevanceScore: '0.65'),
-    ],
-    overallSentimentScore: -0.15,
-    overallSentimentLabel: 'Somewhat-Bearish',
-    tickerSentiment: [
-      TickerSentiment(
-        ticker: 'XOM',
-        relevanceScore: '0.80',
-        tickerSentimentScore: '-0.20',
-        tickerSentimentLabel: 'Somewhat-Bearish',
-      ),
-      TickerSentiment(
-        ticker: 'CVX',
-        relevanceScore: '0.75',
-        tickerSentimentScore: '-0.18',
-        tickerSentimentLabel: 'Somewhat-Bearish',
-      ),
-    ],
-  ),
-  News(
-    title: 'Microsoft Cloud Revenue Grows 30% YoY Driven by AI Demand',
-    url: 'https://example.com/msft-cloud',
-    timePublished: '20260225T160000',
-    authors: ['Lisa Park'],
-    summary:
-        'Microsoft reported a 30% year-over-year increase in cloud revenue, '
-        'largely driven by growing demand for Azure AI services. The company '
-        'saw strong enterprise adoption of its Copilot suite across Office products.',
-    bannerImage: 'https://picsum.photos/seed/microsoft/800/400',
-    source: 'The Verge',
-    categoryWithinSource: 'Technology',
-    sourceDomain: 'theverge.com',
-    topics: [
-      Topic(topic: 'Technology', relevanceScore: '0.92'),
-      Topic(topic: 'Earnings', relevanceScore: '0.85'),
-    ],
-    overallSentimentScore: 0.05,
-    overallSentimentLabel: 'Neutral',
-    tickerSentiment: [
-      TickerSentiment(
-        ticker: 'MSFT',
-        relevanceScore: '0.97',
-        tickerSentimentScore: '0.08',
-        tickerSentimentLabel: 'Neutral',
-      ),
-    ],
-  ),
-];
 
 class NewsScreen extends StatelessWidget {
   const NewsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = isDark(context);
+
     return Scaffold(
-      appBar: AppBar(title: const Text('News')),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(16),
-        itemCount: dummyArticles.length,
-        itemBuilder: (context, index) {
-          return NewsCard(article: dummyArticles[index]);
-        },
+      body: RefreshIndicator(
+        color: AppPalette.vividBlue,
+        onRefresh: () => context.read<NewsCubit>().refresh(),
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              expandedHeight: 120,
+              pinned: false,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(
+                  bottom: Radius.circular(20),
+                ),
+              ),
+              flexibleSpace: ClipRRect(
+                borderRadius: const BorderRadius.vertical(
+                  bottom: Radius.circular(20),
+                ),
+                child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(
+                        "assets/images/hero-image-${isDarkMode ? "2" : "1"}.jpg",
+                      ),
+                      colorFilter: ColorFilter.mode(
+                        Colors.black.withValues(alpha: 0.6),
+                        BlendMode.darken,
+                      ),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  child: SafeArea(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: const [
+                              Icon(Icons.newspaper, color: Colors.white),
+                              SizedBox(width: 10),
+                              Text(
+                                'News',
+                                style: TextStyle(
+                                  fontFamily: 'Garet',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 22,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 4),
+                          const Text(
+                            'Get market insights & updates.',
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w300,
+                              color: Colors.white70,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
+            SliverToBoxAdapter(
+              child: BlocSelector<NewsCubit, NewsState, NewsSort>(
+                selector: (state) => state.sort,
+                builder: (context, currentSort) {
+                  return SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    padding: const EdgeInsets.fromLTRB(10, 12, 16, 4),
+                    child: Row(
+                      children: NewsSort.values.map((sort) {
+                        final isSelected = sort == currentSort;
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: ChoiceChip(
+                            label: Text(_sortLabel(sort)),
+                            selected: isSelected,
+                            onSelected: (_) =>
+                                context.read<NewsCubit>().setSort(sort),
+                            selectedColor: AppPalette.vividBlue,
+                            labelStyle: TextStyle(
+                              color: isSelected ? Colors.white : null,
+                              fontWeight: isSelected
+                                  ? FontWeight.w600
+                                  : FontWeight.normal,
+                            ),
+                            side: isSelected
+                                ? BorderSide.none
+                                : BorderSide(
+                                    color: isDarkMode
+                                        ? Colors.white24
+                                        : Colors.black12,
+                                  ),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  );
+                },
+              ),
+            ),
+
+            BlocBuilder<NewsCubit, NewsState>(
+              builder: (context, state) {
+                // Loading
+                if (state.isLoading && state.articles.isEmpty) {
+                  return const SliverFillRemaining(
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          GlobalLoadingIndicator(
+                            variant: LoadingIndicatorVariant.plane,
+                            size: 256,
+                          ),
+                          SizedBox(height: 0),
+                          Text(
+                            "Crossing the ocean...",
+                            style: TextStyle(fontWeight: FontWeight.w500),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }
+
+                // Error
+                if (state.error != null && state.articles.isEmpty) {
+                  return SliverFillRemaining(
+                    child: _ErrorView(
+                      message: state.error!,
+                      onRetry: () => context.read<NewsCubit>().refresh(),
+                    ),
+                  );
+                }
+
+                // Empty
+                if (state.articles.isEmpty) {
+                  return const SliverFillRemaining(
+                    child: Center(
+                      child: Text(
+                        'No articles found.',
+                        style: TextStyle(fontSize: 16, color: Colors.grey),
+                      ),
+                    ),
+                  );
+                }
+
+                // Article list
+                return SliverPadding(
+                  padding: const EdgeInsets.all(16),
+                  sliver: SliverList.builder(
+                    itemCount: state.articles.length,
+                    itemBuilder: (context, index) {
+                      return NewsCard(article: state.articles[index]);
+                    },
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  static String _sortLabel(NewsSort sort) {
+    switch (sort) {
+      case NewsSort.latest:
+        return 'Latest';
+      case NewsSort.relevance:
+        return 'Relevance';
+      case NewsSort.earliest:
+        return 'Earliest';
+    }
+  }
+}
+
+// ── Error widget (private) ───────────────────────────────────────────────
+
+class _ErrorView extends StatelessWidget {
+  final String message;
+  final VoidCallback onRetry;
+
+  const _ErrorView({required this.message, required this.onRetry});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(32),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.cloud_off_rounded, size: 64, color: Colors.grey[400]),
+            const SizedBox(height: 16),
+            Text(
+              'Failed to load news',
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: 8),
+            Text(
+              message,
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.grey[600], fontSize: 13),
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+            ),
+            const SizedBox(height: 24),
+            FilledButton.icon(
+              onPressed: onRetry,
+              icon: const Icon(Icons.refresh),
+              label: const Text('Retry'),
+              style: FilledButton.styleFrom(
+                backgroundColor: AppPalette.vividBlue,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
