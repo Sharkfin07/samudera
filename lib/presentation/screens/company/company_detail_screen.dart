@@ -455,7 +455,7 @@ class _StockLineChart extends StatelessWidget {
           ),
 
           // ── Border ──
-          borderData: FlBorderData(show: true),
+          borderData: FlBorderData(show: false),
 
           // ── Range ──
           minX: 0,
