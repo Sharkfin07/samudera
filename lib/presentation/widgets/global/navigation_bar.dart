@@ -66,21 +66,6 @@ class _GlobalNavigationBarState extends State<GlobalNavigationBar> {
             ),
             GButton(
               gap: gap,
-              iconActiveColor: isDarkMode
-                  ? AppPalette.lightIndigo
-                  : AppPalette.vividIndigo,
-              iconColor: iconColor,
-              textColor: isDarkMode
-                  ? AppPalette.lightIndigo
-                  : AppPalette.vividIndigo,
-              backgroundColor: AppPalette.vividIndigo.withValues(alpha: .2),
-              iconSize: 24,
-              padding: padding,
-              icon: Icons.search,
-              text: 'Search',
-            ),
-            GButton(
-              gap: gap,
               iconActiveColor: Colors.pink,
               iconColor: iconColor,
               textColor: Colors.pink,

@@ -5,7 +5,6 @@ import 'package:samudera/presentation/cubit/news_cubit.dart';
 import 'package:samudera/presentation/screens/developer/developer_screen.dart';
 import 'package:samudera/presentation/screens/explore/explore_screen.dart';
 import 'package:samudera/presentation/screens/news/news_screen.dart';
-import 'package:samudera/presentation/screens/search/search_screen.dart';
 import 'package:samudera/presentation/widgets/global/navigation_bar.dart';
 
 class HomeShell extends StatefulWidget {
@@ -19,7 +18,6 @@ class _HomeShellState extends State<HomeShell> {
   int _index = 0;
   final List<Widget> _pages = const [
     ExploreScreen(),
-    SearchScreen(),
     NewsScreen(),
     DeveloperScreen(),
   ];
