@@ -23,8 +23,8 @@ class ExploreScreen extends StatelessWidget {
             GlobalSliverAppBar(
               heroImage: "assets/images/hero-image-3.jpg",
               heroTitle: "Explore",
-              heroDesc: "Be updated on today's losers and winners",
-              heroIcon: Icons.abc,
+              heroDesc: "Be updated on today's top performers.",
+              heroIcon: Icons.public,
             ),
 
             SliverToBoxAdapter(
