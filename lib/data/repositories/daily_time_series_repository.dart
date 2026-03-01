@@ -16,7 +16,15 @@ class DailyTimeSeriesRepository {
       symbol,
       outputSize: outputSize,
     );
-    return DailyTimeSeriesResponse.fromJson(response.data);
+    final data = response.data;
+
+    if (data is! Map<String, dynamic> || data['Time Series (Daily)'] == null) {
+      throw Exception(
+        data?['Note'] ?? data?['Information'] ?? 'Invalid response from API',
+      );
+    }
+
+    return DailyTimeSeriesResponse.fromJson(data);
   }
 
   /// Get only closing prices (for simple line chart)

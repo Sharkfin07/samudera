@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:samudera/presentation/dev/widget_showcase.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:samudera/presentation/cubit/company_cubit.dart';
+import 'package:samudera/presentation/cubit/explore_cubit.dart';
+import 'package:samudera/presentation/cubit/news_cubit.dart';
+import 'package:samudera/presentation/screens/home_shell.dart';
 import 'package:samudera/presentation/theme/app_theme.dart';
 
 import './core/config/env_config.dart';
@@ -14,11 +18,19 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: AppTheme.light,
-      darkTheme: AppTheme.dark,
-      themeMode: ThemeMode.system,
-      home: WidgetShowcaseScreen(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<NewsCubit>(create: (_) => NewsCubit()),
+        BlocProvider<ExploreCubit>(create: (_) => ExploreCubit()),
+        BlocProvider<CompanyCubit>(create: (_) => CompanyCubit()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.light,
+        darkTheme: AppTheme.dark,
+        themeMode: ThemeMode.system,
+        home: HomeShell(),
+      ),
     );
   }
 }

@@ -8,6 +8,14 @@ class CompanyRepository {
 
   Future<Company> getCompany(String symbol) async {
     final response = await _service.getCompanyOverview(symbol);
-    return Company.fromJson(response.data);
+    final data = response.data;
+
+    if (data is! Map<String, dynamic> || data['Symbol'] == null) {
+      throw Exception(
+        data?['Note'] ?? data?['Information'] ?? 'Invalid response from API',
+      );
+    }
+
+    return Company.fromJson(data);
   }
 }

@@ -16,6 +16,10 @@ dependencies:
   hive: ^2.2.3
   lottie: ^3.3.2
   google_nav_bar: ^5.0.7
+  super_bullet_list: ^0.0.3
+  flutter_bloc: ^9.1.1
+  fl_chart: ^1.1.1
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:
@@ -29,6 +33,7 @@ flutter:
   assets:
     - .env
     - assets/icons/
+    - assets/images/
     - assets/lottie/
 
   fonts:

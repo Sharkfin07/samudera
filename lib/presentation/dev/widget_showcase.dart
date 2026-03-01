@@ -127,7 +127,10 @@ class WidgetShowcaseScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: GlobalNavigationBar(),
+      bottomNavigationBar: GlobalNavigationBar(
+        index: 0,
+        onTabChange: (int value) {},
+      ),
     );
   }
 

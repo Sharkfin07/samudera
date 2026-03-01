@@ -11,7 +11,7 @@ class AppPalette {
   static final vividBlue = _hexToColor("#0a6cff");
   static final purple = _hexToColor("#8c52ff");
   static final vividIndigo = _hexToColor("#1800ad");
-  static final darkIndigo = _hexToColor("#070127");
+  static final darkIndigo = _hexToColor("#10073d");
   static final lightIndigo = _hexToColor("#f5f0ff");
 
   // * Gradients
