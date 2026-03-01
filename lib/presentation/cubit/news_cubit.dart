@@ -13,7 +13,10 @@ class NewsCubit extends Cubit<NewsState> {
 
   final NewsRepository _repository;
 
-  Future<void> fetchNews() async {
+  Future<void> fetchNews({bool force = false}) async {
+    if (state.isLoading) return;
+    if (!force && state.articles.isNotEmpty) return;
+
     emit(state.copyWith(isLoading: true, error: null));
     try {
       final articles = await _repository.getNews(
@@ -28,18 +31,18 @@ class NewsCubit extends Cubit<NewsState> {
     }
   }
 
-  Future<void> refresh() => fetchNews();
+  Future<void> refresh() => fetchNews(force: true);
 
   void setTickers(List<String> tickers) {
     emit(state.copyWith(tickers: tickers));
-    fetchNews();
+    fetchNews(force: true);
   }
 
   void addTicker(String ticker) {
     final upper = ticker.toUpperCase();
     if (!state.tickers.contains(upper)) {
       emit(state.copyWith(tickers: [...state.tickers, upper]));
-      fetchNews();
+      fetchNews(force: true);
     }
   }
 
@@ -48,27 +51,27 @@ class NewsCubit extends Cubit<NewsState> {
         .where((t) => t != ticker.toUpperCase())
         .toList();
     emit(state.copyWith(tickers: updated));
-    fetchNews();
+    fetchNews(force: true);
   }
 
   void clearTickers() {
     emit(state.copyWith(tickers: []));
-    fetchNews();
+    fetchNews(force: true);
   }
 
   void setTopics(List<String> topics) {
     emit(state.copyWith(topics: topics));
-    fetchNews();
+    fetchNews(force: true);
   }
 
   void setSort(NewsSort sort) {
     if (state.sort == sort) return;
     emit(state.copyWith(sort: sort));
-    fetchNews();
+    fetchNews(force: true);
   }
 
   void setLimit(int limit) {
     emit(state.copyWith(limit: limit));
-    fetchNews();
+    fetchNews(force: true);
   }
 }

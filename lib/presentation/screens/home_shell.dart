@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:samudera/presentation/cubit/explore_cubit.dart';
 import 'package:samudera/presentation/cubit/news_cubit.dart';
 import 'package:samudera/presentation/screens/developer/developer_screen.dart';
 import 'package:samudera/presentation/screens/explore/explore_screen.dart';
@@ -23,23 +24,36 @@ class _HomeShellState extends State<HomeShell> {
     DeveloperScreen(),
   ];
 
-  void _onTabChange(int i) => setState(() {
-    _index = i;
-  });
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _fetchForTab(_index);
+    });
+  }
+
+  void _fetchForTab(int tabIndex) {
+    if (tabIndex == 0) {
+      context.read<ExploreCubit>().fetchMarketMovers();
+    } else if (tabIndex == 2) {
+      context.read<NewsCubit>().fetchNews();
+    }
+  }
+
+  void _onTabChange(int i) {
+    setState(() {
+      _index = i;
+    });
+    _fetchForTab(i);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<NewsCubit>(create: (_) => NewsCubit()..fetchNews()),
-        // tambah BlocProvider lain di sini nanti
-      ],
-      child: Scaffold(
-        body: IndexedStack(index: _index, children: _pages),
-        bottomNavigationBar: GlobalNavigationBar(
-          index: _index,
-          onTabChange: _onTabChange,
-        ),
+    return Scaffold(
+      body: IndexedStack(index: _index, children: _pages),
+      bottomNavigationBar: GlobalNavigationBar(
+        index: _index,
+        onTabChange: _onTabChange,
       ),
     );
   }
