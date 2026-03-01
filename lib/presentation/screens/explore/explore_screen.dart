@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:samudera/core/utils/is_dark.dart';
 import 'package:samudera/presentation/cubit/explore_cubit.dart';
 import 'package:samudera/presentation/theme/app_palette.dart';
+import 'package:samudera/presentation/cubit/company_cubit.dart';
+import 'package:samudera/presentation/screens/company/company_detail_screen.dart';
 import 'package:samudera/presentation/widgets/explore/market_mover_tile.dart';
 import 'package:samudera/presentation/widgets/global/global_loading_indicator.dart';
 import 'package:samudera/presentation/widgets/global/global_sliver_app_bar.dart';
@@ -158,7 +160,20 @@ class ExploreScreen extends StatelessWidget {
                   itemCount: state.currentList.length,
                   separatorBuilder: (_, _) => const Divider(height: 1),
                   itemBuilder: (context, index) {
-                    return MarketMoverTile(mover: state.currentList[index]);
+                    final mover = state.currentList[index];
+                    return MarketMoverTile(
+                      mover: mover,
+                      onTap: () {
+                        context.read<CompanyCubit>().loadCompany(mover.ticker);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) =>
+                                CompanyDetailScreen(symbol: mover.ticker),
+                          ),
+                        );
+                      },
+                    );
                   },
                 );
               },

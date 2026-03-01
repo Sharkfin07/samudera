@@ -22,7 +22,7 @@ class CompanyCubit extends Cubit<CompanyState> {
   final GlobalQuoteRepository _quoteRepo;
   final DailyTimeSeriesRepository _timeSeriesRepo;
 
-  /// Fetch all company data in parallel (overview + quote + chart).
+  /// Fetch all company data (but with a 1.2 second delay from one another)
   Future<void> loadCompany(String symbol, {bool force = false}) async {
     if (state.isLoading) return;
     if (!force && state.symbol == symbol && state.company != null) return;
@@ -30,18 +30,20 @@ class CompanyCubit extends Cubit<CompanyState> {
     emit(CompanyState(symbol: symbol, isLoading: true));
 
     try {
-      // Fire all 3 requests in parallel to minimise wait time
-      final results = await Future.wait([
-        _companyRepo.getCompany(symbol),
-        _quoteRepo.getGlobalQuote(symbol),
-        _timeSeriesRepo.getChartData(symbol, limit: 30),
-      ]);
+      // Stagger requests to avoid API rate-limit
+      final company = await _companyRepo.getCompany(symbol);
+      await Future.delayed(const Duration(milliseconds: 1200));
+
+      final quote = await _quoteRepo.getGlobalQuote(symbol);
+      await Future.delayed(const Duration(milliseconds: 1200));
+
+      final chartData = await _timeSeriesRepo.getChartData(symbol, limit: 30);
 
       emit(
         state.copyWith(
-          company: results[0] as Company,
-          quote: results[1] as GlobalQuote,
-          chartData: results[2] as List<({DateTime date, double close})>,
+          company: company,
+          quote: quote,
+          chartData: chartData,
           isLoading: false,
         ),
       );

@@ -19,6 +19,7 @@ dependencies:
   super_bullet_list: ^0.0.3
   flutter_bloc: ^9.1.1
   fl_chart: ^1.1.1
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:

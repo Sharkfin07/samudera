@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:samudera/presentation/cubit/company_cubit.dart';
 import 'package:samudera/presentation/cubit/explore_cubit.dart';
 import 'package:samudera/presentation/cubit/news_cubit.dart';
 import 'package:samudera/presentation/screens/home_shell.dart';
@@ -21,6 +22,7 @@ class MainApp extends StatelessWidget {
       providers: [
         BlocProvider<NewsCubit>(create: (_) => NewsCubit()),
         BlocProvider<ExploreCubit>(create: (_) => ExploreCubit()),
+        BlocProvider<CompanyCubit>(create: (_) => CompanyCubit()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
