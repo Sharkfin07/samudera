@@ -32,6 +32,7 @@ class _HomeShellState extends State<HomeShell> {
     });
   }
 
+  // Lazy fetching (hemat token cui)
   void _fetchForTab(int tabIndex) {
     if (tabIndex == 0) {
       context.read<ExploreCubit>().fetchMarketMovers();

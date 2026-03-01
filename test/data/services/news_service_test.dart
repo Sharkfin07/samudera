@@ -15,7 +15,7 @@ void main() {
     service = NewsService(client: mockClient);
   });
 
-  Response<dynamic> _mockResponse(Map<String, dynamic> data) {
+  Response<dynamic> mockResponse(Map<String, dynamic> data) {
     return Response(
       data: data,
       statusCode: 200,
@@ -49,7 +49,7 @@ void main() {
             function: 'NEWS_SENTIMENT',
             parameters: any(named: 'parameters'),
           ),
-        ).thenAnswer((_) async => _mockResponse(mockData));
+        ).thenAnswer((_) async => mockResponse(mockData));
 
         // Act
         final response = await service.getNewsSentiment();
@@ -73,7 +73,7 @@ void main() {
             function: 'NEWS_SENTIMENT',
             parameters: {'tickers': 'AAPL,MSFT'},
           ),
-        ).thenAnswer((_) async => _mockResponse(mockData));
+        ).thenAnswer((_) async => mockResponse(mockData));
 
         // Act
         await service.getNewsSentiment(tickers: ['AAPL', 'MSFT']);
@@ -95,7 +95,7 @@ void main() {
             function: 'NEWS_SENTIMENT',
             parameters: {'limit': '25'},
           ),
-        ).thenAnswer((_) async => _mockResponse(mockData));
+        ).thenAnswer((_) async => mockResponse(mockData));
 
         // Act
         await service.getNewsSentiment(limit: 25);
@@ -117,7 +117,7 @@ void main() {
             function: 'NEWS_SENTIMENT',
             parameters: {'topics': 'technology,earnings'},
           ),
-        ).thenAnswer((_) async => _mockResponse(mockData));
+        ).thenAnswer((_) async => mockResponse(mockData));
 
         // Act
         await service.getNewsSentiment(topics: ['technology', 'earnings']);
@@ -139,7 +139,7 @@ void main() {
             function: 'NEWS_SENTIMENT',
             parameters: {'sort': 'RELEVANCE'},
           ),
-        ).thenAnswer((_) async => _mockResponse(mockData));
+        ).thenAnswer((_) async => mockResponse(mockData));
 
         // Act
         await service.getNewsSentiment(sort: NewsSort.relevance);
@@ -167,7 +167,7 @@ void main() {
               'time_to': timeTo.toIso8601String(),
             },
           ),
-        ).thenAnswer((_) async => _mockResponse(mockData));
+        ).thenAnswer((_) async => mockResponse(mockData));
 
         // Act
         await service.getNewsSentiment(timeFrom: timeFrom, timeTo: timeTo);
@@ -202,7 +202,7 @@ void main() {
               'time_to': timeTo.toIso8601String(),
             },
           ),
-        ).thenAnswer((_) async => _mockResponse(mockData));
+        ).thenAnswer((_) async => mockResponse(mockData));
 
         // Act
         await service.getNewsSentiment(
