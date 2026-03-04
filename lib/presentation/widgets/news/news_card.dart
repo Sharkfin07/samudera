@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:samudera/core/utils/is_dark.dart';
+import 'package:samudera/core/utils/url_launcher.dart';
 import 'package:samudera/data/models/news_model.dart';
 import 'package:samudera/presentation/theme/app_palette.dart';
 import 'package:samudera/presentation/widgets/global/global_loading_indicator.dart';
@@ -15,7 +16,10 @@ class NewsCard extends StatelessWidget {
     final bool isDarkMode = isDark(context);
 
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        onTap;
+        goToUrl(article.url);
+      },
       child: Container(
         margin: const EdgeInsets.only(bottom: 16),
         decoration: BoxDecoration(
