@@ -34,7 +34,7 @@ class _HomeShellState extends State<HomeShell> {
   void _fetchForTab(int tabIndex) {
     if (tabIndex == 0) {
       context.read<ExploreCubit>().fetchMarketMovers();
-    } else if (tabIndex == 2) {
+    } else if (tabIndex == 1) {
       context.read<NewsCubit>().fetchNews();
     }
   }
