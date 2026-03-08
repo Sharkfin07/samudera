@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:samudera/core/utils/is_dark.dart';
+import 'package:samudera/core/utils/url_launcher.dart';
 import 'package:samudera/data/models/company_model.dart';
 import 'package:samudera/data/models/global_quote_model.dart';
 import 'package:samudera/presentation/cubit/company_cubit.dart';
 import 'package:samudera/presentation/theme/app_palette.dart';
+import 'package:samudera/presentation/widgets/global/global_button.dart';
 import 'package:samudera/presentation/widgets/global/global_loading_indicator.dart';
 
 class CompanyDetailScreen extends StatelessWidget {
@@ -282,6 +284,14 @@ class _CompanyDetailBody extends StatelessWidget {
                         height: 1.6,
                         color: isDarkMode ? Colors.white70 : Colors.grey[700],
                       ),
+                    ),
+                    const SizedBox(height: 24),
+                    GlobalButton(
+                      text: "Visit Website",
+                      variant: ButtonVariant.gradient,
+                      width: double.infinity,
+                      icon: Icon(Icons.language),
+                      onPressed: () => goToUrl(company.officialSite),
                     ),
                   ],
                 ),

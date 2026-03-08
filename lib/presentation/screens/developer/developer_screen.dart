@@ -36,30 +36,32 @@ class _DeveloperScreenState extends State<DeveloperScreen> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(width: double.infinity),
-            Text(
-              "Made With Love By:",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-            ),
-            SizedBox(height: 16),
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(24, 48, 24, 24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(width: double.infinity),
+              Text(
+                "Made With Love By:",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+              ),
+              SizedBox(height: 16),
 
-            // * Dev Card
-            DeveloperCard(picturePath: picturePath),
-            SizedBox(height: 16),
+              // * Dev Card
+              DeveloperCard(picturePath: picturePath),
+              SizedBox(height: 16),
 
-            // * Easter egg button
-            GlobalButton(
-              text: "Version 1.0.0",
-              variant: ButtonVariant.text,
-              onPressed: _onEasterEggTap,
-            ),
-          ],
+              // * Easter egg button
+              GlobalButton(
+                text: "Version 1.0.0",
+                variant: ButtonVariant.text,
+                onPressed: _onEasterEggTap,
+              ),
+            ],
+          ),
         ),
       ),
     );
